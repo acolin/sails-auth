@@ -11,8 +11,7 @@
 'use strict';
 
 module.exports = function (req, token, done) {
-
-  sails.models.passport.findOne({ accessToken: token }, function (err, passport) {
+  sails.models.passport.findOne({ accessToken: token }).exec(function (err, passport) {
     if (err) {
       return done(err);
     }
@@ -21,7 +20,7 @@ module.exports = function (req, token, done) {
       return done(null, false);
     }
 
-    sails.models.user.findOneById(passport.user, function (err, user) {
+    sails.models.user.findOne({ id: passport.user }).exec(function (err, user) {
       if (err) {
         return done(err);
       }
