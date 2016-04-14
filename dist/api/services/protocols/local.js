@@ -1,6 +1,7 @@
 'use strict';
 
 var crypto = require('crypto');
+var base64URL = require('base64url');
 var SAError = require('../../../lib/error/SAError.js');
 
 /**
@@ -243,5 +244,5 @@ function validateEmail(str) {
 }
 
 function generateToken() {
-  return crypto.randomBytes(48).toString('base64');
+  return base64URL(crypto.randomBytes(48));
 }
